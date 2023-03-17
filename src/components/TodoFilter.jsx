@@ -1,6 +1,6 @@
 const TodoFilter = ({ changeFilter, filter }) => {
   return (
-    <section className='container mx-auto  mt-8 flex justify-evenly rounded-md bg-white p-4 font-semibold  dark:bg-slate-800'>
+    <section className='container mx-auto mt-8 flex  justify-evenly rounded-md bg-white p-4 font-semibold transition-all duration-1000  dark:bg-slate-800'>
       <button
         className={filter === 'all' ? 'text-blue-500' : 'text-gray-500'}
         onClick={() => changeFilter('all')}

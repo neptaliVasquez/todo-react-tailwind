@@ -12,8 +12,8 @@ const TodoItem = ({ todo, deleteTodo, updateTodo }) => {
   };
 
   return (
-    <article className='flex justify-between gap-4 border-b border-b-gray-200 dark:bg-slate-800'>
-      <div className='flex items-center gap-4'>
+    <article className='flex justify-between gap-4  border-b border-b-gray-200 transition-all duration-1000  dark:bg-slate-800'>
+      <div className='flex items-center gap-4 '>
         {completed ? (
           <button
             onClick={handleUpdateTodo}

@@ -1,28 +1,28 @@
 import MoonIcon from './icons/MoonIcon';
 import SunIcon from './icons/SunIcon';
 import { useState, useEffect } from 'react';
+
+const initializeStateDarkMode = localStorage.getItem('theme') === 'dark';
+
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(null);
+  const [darkMode, setDarkMode] = useState(initializeStateDarkMode);
 
   const handleClickToggleTheme = () => {
     setDarkMode(!darkMode);
   };
 
   useEffect(() => {
-    console.log('test');
     if (darkMode) {
-      localStorage.theme = 'dark';
-      document.documentElement.classList.remove('light');
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
-      localStorage.theme = 'light';
       document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
+      localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
 
   return (
-    <header className='container mx-auto px-4 pt-8'>
+    <header className='container mx-auto px-4 pt-8 md:max-w-xl'>
       <div className='flex justify-between px-4 pt-8'>
         <h1 className='text-3xl font-semibold uppercase tracking-[.4em] text-white'>
           todo

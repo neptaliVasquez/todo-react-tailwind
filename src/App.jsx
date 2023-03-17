@@ -1,41 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import TodoCreate from './components/TodoCreate';
 import TodoList from './components/TodoList';
 import TodoComputed from './components/TodoComputed';
 import TodoFilter from './components/TodoFilter';
 
-const initialStateTodos = [
-  {
-    id: 1,
-    title: 'Go to the gym',
-    completed: true,
-  },
-  {
-    id: 2,
-    title: 'Drink water',
-    completed: false,
-  },
-  {
-    id: 3,
-    title: 'Study React',
-    completed: false,
-  },
-  {
-    id: 4,
-    title: 'Play Raw deal',
-    completed: false,
-  },
-];
+const initialStateTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
 const App = () => {
   const [todos, setTodos] = useState(initialStateTodos);
   const [filter, setFilter] = useState('all');
 
+  // Watch
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   // Methods
   const createTodo = (title) => {
     const newTodo = {
-      id: todos.length + 1,
+      id: Date.now(),
       title: title.trim(),
       completed: false,
     };
@@ -83,9 +67,9 @@ const App = () => {
   const itemsLeft = todos.filter((todo) => !todo.completed).length;
 
   return (
-    <div className='min-h-screen bg-gray-300  bg-[url(./assets/images/bg-mobile-light.jpg)] bg-contain bg-no-repeat px-4 dark:bg-zinc-900 dark:bg-[url(./assets/images/bg-mobile-dark.jpg)]'>
+    <div className='min-h-screen bg-gray-300 bg-[url(./assets/images/bg-mobile-light.jpg)] bg-contain  bg-no-repeat px-4 transition-all duration-1000 dark:bg-zinc-900 dark:bg-[url(./assets/images/bg-mobile-dark.jpg)] md:bg-[url(./assets/images/bg-desktop-light.jpg)] md:dark:bg-[url(./assets/images/bg-desktop-dark.jpg)]'>
       <Header />
-      <main className='mx-automt-8 container px-4'>
+      <main className='container mx-auto mt-8 px-4 md:max-w-xl'>
         <TodoCreate createTodo={createTodo} />
         <TodoList
           updateTodo={updateTodo}
